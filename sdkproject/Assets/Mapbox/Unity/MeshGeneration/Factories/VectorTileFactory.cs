@@ -28,7 +28,10 @@
 		private string _mapId = "mapbox.mapbox-streets-v7";
 
 		[SerializeField]
-		private bool _useAlternativeDataSource = false;	
+		private bool _useGeoServer = false;	
+		
+		[SerializeField]
+		private string _gridset = Utils.Constants.WebMercatorGridset;
 
 		[NodeEditorElementAttribute("Layer Visalizers")]
 		public List<LayerVisualizerBase> Visualizers;
@@ -86,7 +89,7 @@
 
 		internal override void OnRegistered(UnityTile tile)
 		{
-			var vectorTile = _useAlternativeDataSource ? new AlternativeVectorTile() : new VectorTile();
+			var vectorTile = _useGeoServer ? new GeoServerVectorTile(_gridset) : new VectorTile();
 			OnRegisteredTile(tile, vectorTile);
 		}
 

@@ -11,7 +11,9 @@ namespace Mapbox.Editor
 	{
 		private string _defaultMapId = "mapbox.mapbox-streets-v7";
 		public SerializedProperty mapId_Prop;
-		private SerializedProperty _useAlternativeUrl;
+		private SerializedProperty _useGeoServer;
+		private SerializedProperty _gridset;
+		private string _defaultGridset = Utils.Constants.WebMercatorGridset;
 		private VectorTileFactory _factory;
 		private MonoScript script;
 
@@ -19,7 +21,8 @@ namespace Mapbox.Editor
 		{
 			script = MonoScript.FromScriptableObject((VectorTileFactory)target);
 			mapId_Prop = serializedObject.FindProperty("_mapId");
-			_useAlternativeUrl = serializedObject.FindProperty("_useAlternativeDataSource");
+			_useGeoServer = serializedObject.FindProperty("_useGeoServer");
+			_gridset = serializedObject.FindProperty("_gridset");
 			_factory = target as VectorTileFactory;
 		}
 
@@ -40,7 +43,10 @@ namespace Mapbox.Editor
 			}
 			EditorGUILayout.EndHorizontal();
 			
-			EditorGUILayout.PropertyField(_useAlternativeUrl);
+			EditorGUILayout.PropertyField(_useGeoServer);
+			// TODO geoAR: make readonly when '_useGeoServer' is not selected
+			EditorGUILayout.PropertyField(_gridset);
+			
 			EditorGUILayout.Space();
 			EditorGUILayout.LabelField("Visualizers");
 			var facs = serializedObject.FindProperty("Visualizers");

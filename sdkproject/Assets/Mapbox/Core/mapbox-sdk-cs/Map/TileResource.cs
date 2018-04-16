@@ -49,13 +49,13 @@ namespace Mapbox.Map
 
 		public static TileResource MakeVector(CanonicalTileId id, string mapId)
 		{			
-			// Mapbox URL format: {https://api.mapbox.com/v4/map_id} / {9/266/180} .vector.pbf
+			// Mapbox URL format: https://api.mapbox.com/v4/ {map_id} / {z/x/y} .vector.pbf
 			return new TileResource(string.Format("{0}/{1}.vector.pbf", MapUtils.MapIdToUrl(mapId ?? "mapbox.mapbox-streets-v7"), id));
 		}
 		
 		public static TileResource MakeGeoServerVector(CanonicalTileId id, string mapId, string gridset)
 		{			
-			// GeoServer URL format: {http://host:port/geoserver/gwc/service/tms/1.0.0/layer_name} @ {gridset_name} @pbf/ {2/0/0}.pbf
+			// GeoServer URL format: http://host:port/geoserver/gwc/service/tms/1.0.0/ {layer_name} @ {gridset_name} @pbf/ {z/x/y}.pbf
 			if (Constants.WebMercatorGridset.Equals(gridset))
 			{
 				// flip y-axis in case of WebMercator projection
