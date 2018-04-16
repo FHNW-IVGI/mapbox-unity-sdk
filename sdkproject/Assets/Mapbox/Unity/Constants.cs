@@ -16,6 +16,9 @@ namespace Mapbox.Unity
 			public const string DID_PROMPT_CONFIGURATION = "MAPBOX_DID_PROMPT_CONFIGURATION";
 			public static readonly string MAPBOX_RESOURCES_RELATIVE = System.IO.Path.Combine("Mapbox", "MapboxConfiguration");
 			public static readonly string MAPBOX_RESOURCES_ABSOLUTE = System.IO.Path.Combine(System.IO.Path.Combine(Application.dataPath, "Resources"), "Mapbox");
+			
+			public const string GEOSERVER_CONFIG_FILE = "GeoServerConfiguration.txt";
+			public static readonly string GEOSERVER_RESOURCES_RELATIVE = System.IO.Path.Combine("Mapbox", "GeoServerConfiguration");
 		}
 
 		/// <summary>
