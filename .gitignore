@@ -66,3 +66,6 @@ tools/packages.config.md5sum
 sdkproject/.idea/.idea.sdkproject/riderModule.iml
 sdkproject/.idea/.idea.sdkproject/.idea/modules.xml
 sdkproject/.idea/.idea.sdkproject/.idea/workspace.xml
+
+.idea/
+*.sln
