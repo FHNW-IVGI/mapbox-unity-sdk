@@ -118,22 +118,24 @@ namespace Mapbox.Unity.MeshGeneration.Data
 		internal void Initialize(IMapReadable map, UnwrappedTileId tileId, float scale, int zoom, Texture2D loadingTexture = null)
 		{
 			TileScale = scale;
+			_unwrappedTileId = tileId;
+			_loadingTexture = loadingTexture;
 			
-			// TODO geoAR: use bool flag instead of direct type check
+			// TODO geoAR: use boolean flag instead of direct type check
 			if (map is SwissBasicMap)
 			{
+				// scale is constant, does not depend on latitude
 				_relativeScale = scale;
 				_rect = SwissConversions.TileBounds(tileId);
+				// do not wrap around
+				_canonicalTileId = new CanonicalTileId(tileId.Z, tileId.X, tileId.Y);
 			}
 			else
 			{
 				_relativeScale = 1 / Mathf.Cos(Mathf.Deg2Rad * (float)map.CenterLatitudeLongitude.x);
 				_rect = Conversions.TileBounds(tileId);
+				_canonicalTileId = tileId.Canonical;
 			}
-			
-			_unwrappedTileId = tileId;
-			_canonicalTileId = tileId.Canonical;
-			_loadingTexture = loadingTexture;
 
 			float scaleFactor = 1.0f;
 			if (_isInitialized == false)
