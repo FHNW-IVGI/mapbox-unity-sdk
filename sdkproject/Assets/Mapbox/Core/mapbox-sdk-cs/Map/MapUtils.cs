@@ -71,7 +71,7 @@ namespace Mapbox.Map
 				Debug.LogError("GeoServer URL is not specifided. To configure GeoServer URL go to 'Mapbox->Setup GeoServer");
 			}
 			
-			return  geoServerBaseUrl + Constants.GeoServerAPI + id;
+			return  geoServerBaseUrl + Constants.GeoServerGeoWebCacheAPI + id;
 		}
 	}
 }

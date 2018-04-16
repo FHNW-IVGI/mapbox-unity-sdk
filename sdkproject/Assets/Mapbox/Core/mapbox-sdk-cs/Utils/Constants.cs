@@ -27,7 +27,7 @@ namespace Mapbox.Utils
 		public const float EpsilonFloatingPoint = 1E-05f;
 
 		/// <summary> GeoServer GeoWebCache API. </summary>
-		public const string GeoServerAPI = "geoserver/gwc/service/tms/1.0.0/";
+		public const string GeoServerGeoWebCacheAPI = "gwc/service/tms/1.0.0/";
 		
 		/// <summary> GeoServer's preconfuigred  Web Mercator gridset. </summary>
 		public const string GeoServerWebMercatorGridset = "EPSG:900913";
