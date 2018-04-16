@@ -39,7 +39,7 @@ namespace Mapbox.Map {
 	///	}));
 	/// </code>
 	/// </example>
-	public sealed class VectorTile : Tile, IDisposable {
+	public class VectorTile : Tile, IDisposable {
 		// FIXME: Namespace here is very confusing and conflicts (sematically)
 		// with his class. Something has to be renamed here.
 		private Mapbox.VectorTile.VectorTile data;
@@ -55,12 +55,13 @@ namespace Mapbox.Map {
 		}
 
 
+		// TODO geoAR: check what exactly should be uncommented
 		//TODO: uncomment if 'VectorTile' class changes from 'sealed'
 		//protected override void Dispose(bool disposeManagedResources)
-		//~VectorTile()
-		//{
-		//    Dispose(false);
-		//}
+		~VectorTile()
+		{
+		    Dispose(false);
+		}
 
 
 		public void Dispose() {

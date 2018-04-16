@@ -3,6 +3,9 @@
 //     Copyright (c) 2016 Mapbox. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
+using UnityEngine;
+
 namespace Mapbox.Map
 {
 	using Platform;
@@ -43,9 +46,19 @@ namespace Mapbox.Map
 			return new TileResource(string.Format("{0}/{1}.pngraw", MapUtils.MapIdToUrl(mapId ?? "mapbox.terrain-rgb"), id));
 		}
 
-		public static TileResource MakeVector(CanonicalTileId id, string mapId)
-		{
-			return new TileResource(string.Format("{0}/{1}.vector.pbf", MapUtils.MapIdToUrl(mapId ?? "mapbox.mapbox-streets-v7"), id));
+		public static TileResource MakeVector(CanonicalTileId id, string mapId, bool alternative=false)
+		{			
+			// GeoServer: {http://localhost:8580/geoserver/gwc/service/tms/1.0.0/test:linesV} @EPSG%3A2056@pbf/ {2/0/0}.pbf
+			// Mapbox: {https://api.mapbox.com/v4/mschoenhozer.9bdivm08} / {9/266/180} .vector.pbf
+			// TODO geoAR: only for debugging, adjust coordinates to canonical tile id conversion
+			if (alternative)
+			{
+				id = new CanonicalTileId(0, 0, 0);
+			}
+			
+			return alternative ? 
+				new TileResource(string.Format("{0}@EPSG%3A2056@pbf/{1}.pbf", MapUtils.MapIdToUrl(mapId, true), id)) :
+				new TileResource(string.Format("{0}/{1}.vector.pbf", MapUtils.MapIdToUrl(mapId ?? "mapbox.mapbox-streets-v7"), id));
 		}
 
 		internal static TileResource MakeStyleOptimizedVector(CanonicalTileId id, string mapId, string optimizedStyleId, string modifiedDate)

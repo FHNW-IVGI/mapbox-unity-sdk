@@ -1,4 +1,4 @@
-namespace Mapbox.Unity.MeshGeneration.Factories
+﻿namespace Mapbox.Unity.MeshGeneration.Factories
 {
 	using System.Collections.Generic;
 	using UnityEngine;
@@ -11,12 +11,12 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 	///	Vector Tile Factory
 	/// Vector data is much more detailed compared to terrain and image data so we have a different structure to process 
 	/// vector data(compared to other factories). First of all, how does the vector data itself structured? Vector tile 
-	/// data contains 'vector layers' as immediate children.And then each of these vector layers contains a number of  
-	/// 'features' inside.I.e.vector data for a tile has 'building', 'road', 'landuse' etc layers. Then building layer 
+	/// data contains 'vector layers' as immediate children. And then each of these vector layers contains a number of  
+	/// 'features' inside. I.e.vector data for a tile has 'building', 'road', 'landuse' etc layers. Then building layer 
 	/// has a number of polygon features, road layer has line features etc.
 	/// Similar to this, vector tile factory contains bunch of 'layer visualizers' and each one of them corresponds to 
-	/// one (or more) vector layers in data.So when data is received, factory goes through all layers inside and passes 
-	/// them to designated layer visualizers.We're using layer name as key here, to find the designated layer visualizer, 
+	/// one (or more) vector layers in data. So when data is received, factory goes through all layers inside and passes 
+	/// them to designated layer visualizers. We're using layer name as key here, to find the designated layer visualizer, 
 	/// like 'building', 'road'. (vector tile factory visual would help here). If it can't find a layer visualizer for 
 	/// that layer, it'll be skipped and not processed at all.If all you need is 1-2 layers, it's indeed a big waste to 
 	/// pull whole vector data and you can use 'Style Optimized Vector Tile Factory' to pull only the layer you want to use.
@@ -26,6 +26,9 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 	{
 		[SerializeField]
 		private string _mapId = "mapbox.mapbox-streets-v7";
+
+		[SerializeField]
+		private bool _useAlternativeDataSource = false;	
 
 		[NodeEditorElementAttribute("Layer Visalizers")]
 		public List<LayerVisualizerBase> Visualizers;
@@ -83,43 +86,47 @@ namespace Mapbox.Unity.MeshGeneration.Factories
 
 		internal override void OnRegistered(UnityTile tile)
 		{
-			var vectorTile = new VectorTile();
-			tile.AddTile(vectorTile);
+			var vectorTile = _useAlternativeDataSource ? new AlternativeVectorTile() : new VectorTile();
+			OnRegisteredTile(tile, vectorTile);
+		}
 
+		private void OnRegisteredTile(UnityTile unityTile, VectorTile vectorTile)
+		{
+			unityTile.AddTile(vectorTile);
 
-			vectorTile.Initialize(_fileSource, tile.CanonicalTileId, _mapId, () =>
+			vectorTile.Initialize(_fileSource, unityTile.CanonicalTileId, _mapId, () =>
 			{
-				if (tile == null)
+				if (unityTile == null)
 				{
 					return;
 				}
 
 				if (vectorTile.HasError)
 				{
-					OnErrorOccurred(new TileErrorEventArgs(tile.CanonicalTileId, vectorTile.GetType(), tile, vectorTile.Exceptions));
-					tile.VectorDataState = TilePropertyState.Error;
+					OnErrorOccurred(new TileErrorEventArgs(unityTile.CanonicalTileId, vectorTile.GetType(), unityTile, vectorTile.Exceptions));
+					unityTile.VectorDataState = TilePropertyState.Error;
 					return;
 				}
 
-				if (_cachedData.ContainsKey(tile))
+				if (_cachedData.ContainsKey(unityTile))
 				{
-					_cachedData[tile] = vectorTile;
+					_cachedData[unityTile] = vectorTile;
 				}
 				else
 				{
-					_cachedData.Add(tile, vectorTile);
+					_cachedData.Add(unityTile, vectorTile);
 				}
 
 				// FIXME: we can make the request BEFORE getting a response from these!
-				if (tile.HeightDataState == TilePropertyState.Loading ||
-					tile.RasterDataState == TilePropertyState.Loading)
+				if (unityTile.HeightDataState == TilePropertyState.Loading ||
+					unityTile.RasterDataState == TilePropertyState.Loading)
 				{
-					tile.OnHeightDataChanged += DataChangedHandler;
-					tile.OnRasterDataChanged += DataChangedHandler;
+					unityTile.OnHeightDataChanged += DataChangedHandler;
+					unityTile.OnRasterDataChanged += DataChangedHandler;
 				}
 				else
 				{
-					CreateMeshes(tile);
+					CreateMeshes(unityTile);
 				}
 			});
 		}

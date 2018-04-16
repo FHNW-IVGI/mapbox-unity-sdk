@@ -11,6 +11,7 @@ namespace Mapbox.Editor
 	{
 		private string _defaultMapId = "mapbox.mapbox-streets-v7";
 		public SerializedProperty mapId_Prop;
+		private SerializedProperty _useAlternativeUrl;
 		private VectorTileFactory _factory;
 		private MonoScript script;
 
@@ -18,6 +19,7 @@ namespace Mapbox.Editor
 		{
 			script = MonoScript.FromScriptableObject((VectorTileFactory)target);
 			mapId_Prop = serializedObject.FindProperty("_mapId");
+			_useAlternativeUrl = serializedObject.FindProperty("_useAlternativeDataSource");
 			_factory = target as VectorTileFactory;
 		}
 
@@ -37,7 +39,8 @@ namespace Mapbox.Editor
 				Repaint();
 			}
 			EditorGUILayout.EndHorizontal();
-
+			
+			EditorGUILayout.PropertyField(_useAlternativeUrl);
 			EditorGUILayout.Space();
 			EditorGUILayout.LabelField("Visualizers");
 			var facs = serializedObject.FindProperty("Visualizers");

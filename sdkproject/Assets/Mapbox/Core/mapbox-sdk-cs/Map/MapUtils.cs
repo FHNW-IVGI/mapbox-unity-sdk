@@ -47,11 +47,22 @@ namespace Mapbox.Map
 		/// </summary>
 		/// <returns>The identifier to URL.</returns>
 		/// <param name="id">The style id.</param>
-		public static string MapIdToUrl(string id)
+		/// <param name="alternative">If to use alternative URL.</param>
+		public static string MapIdToUrl(string id, bool alternative=false)
+		{
+			return alternative ? MapIdToAlternativeUrl(id) : MapIdToMapboxUrl(id);
+		}
+		
+		private static string MapIdToMapboxUrl(string id)
 		{
 			// TODO: Validate that id is a real id
-			const string MapBaseApi = Constants.BaseAPI + "v4/";
-
+			const string MapBaseApi = Constants.BaseAPI + "v4/";			
+			return MapBaseApi + id;
+		}
+		
+		private static string MapIdToAlternativeUrl(string id)
+		{
+			const string MapBaseApi = Constants.AlternativeAPI + "1.0.0/";
 			return MapBaseApi + id;
 		}
 	}

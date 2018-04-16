@@ -26,5 +26,8 @@ namespace Mapbox.Utils
 		/// <summary> Epsilon to comapre floating point numbers</summary>
 		public const float EpsilonFloatingPoint = 1E-05f;
 
+		// TODO geoAR: add text fied for configuration in Unity  
+		public const string AlternativeAPI = "http://localhost:8580/geoserver/gwc/service/tms/";
+
 	}
 }
