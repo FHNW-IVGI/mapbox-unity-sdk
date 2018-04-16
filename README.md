@@ -47,7 +47,7 @@ To build a Unity Package for import into your own project from the included `sdk
 ### GeoServer Support
 To retrive data from GeoGerver:
 1. Configure GeoServer URL in `Mapbox->Setup GeoServer`.
-![Setup GeoServer screenshot](mapbox-unity-sdk/documentation/docs/images/configure-geoserver-url.png)
+!['Setup GeoServer' screenshot](documentation/docs/images/configure-geoserver-url.png)
 2. TODO
 
 # GeoServer Configuration
