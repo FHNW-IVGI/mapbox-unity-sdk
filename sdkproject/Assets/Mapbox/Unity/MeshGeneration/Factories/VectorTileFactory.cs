@@ -31,7 +31,7 @@
 		private bool _useGeoServer = false;	
 		
 		[SerializeField]
-		private string _gridset = Utils.Constants.WebMercatorGridset;
+		private string _gridset = Utils.Constants.GeoServerWebMercatorGridset;
 
 		[NodeEditorElementAttribute("Layer Visalizers")]
 		public List<LayerVisualizerBase> Visualizers;

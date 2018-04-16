@@ -50,9 +50,18 @@ namespace Mapbox.Unity
 
         public void SetConfiguration(GeoServerConfiguration configuration)
         {
-            // TODO geoAR: add config validation (e.g. check if url is valid GeoServer url)
+            if (string.IsNullOrEmpty(configuration.Url))
+            {
+                Debug.LogWarning("GeoServer URL is emplty");
+            }
+            else if (!configuration.Url.EndsWith("/"))
+            {
+                // TODO geoAR: check if url is valid GeoServer url
+                configuration.Url += "/";
+            }
+
             _configuration = configuration;
-            
+
             //save the config
             var configFile = Path.Combine(Constants.Path.MAPBOX_RESOURCES_ABSOLUTE, Constants.Path.GEOSERVER_CONFIG_FILE);
             var json = JsonUtility.ToJson(_configuration);

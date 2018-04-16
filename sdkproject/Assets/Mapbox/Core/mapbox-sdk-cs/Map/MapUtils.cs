@@ -4,6 +4,9 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using Mapbox.Unity;
+using UnityEngine;
+
 namespace Mapbox.Map
 {
     using System;
@@ -62,8 +65,13 @@ namespace Mapbox.Map
 		
 		private static string MapIdToGeoServerUrl(string id)
 		{
-			const string MapBaseApi = Constants.GeoServerAPI + "1.0.0/";
-			return MapBaseApi + id;
+			string geoServerBaseUrl = GeoServerAccess.Instance.Configuration.Url;
+			if (string.IsNullOrEmpty(geoServerBaseUrl))
+			{
+				Debug.LogError("GeoServer URL is not specifided. To configure GeoServer URL go to 'Mapbox->Setup GeoServer");
+			}
+			
+			return  geoServerBaseUrl + Constants.GeoServerAPI + id;
 		}
 	}
 }

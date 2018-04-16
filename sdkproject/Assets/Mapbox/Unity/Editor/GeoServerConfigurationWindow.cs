@@ -155,7 +155,7 @@ namespace Mapbox.Editor
 		    
 		    EditorGUILayout.BeginHorizontal(_horizontalGroup);
 		    GUIContent labelContent = new GUIContent("For example");
-		    GUIContent linkContent = new GUIContent("http://localhost:8080/");
+		    GUIContent linkContent = new GUIContent("http://my-geoserver.com/");
 		    EditorGUILayout.LabelField(labelContent, _bodyStyle, GUILayout.Width(_bodyStyle.CalcSize(labelContent).x));
 		    EditorGUILayout.LabelField(linkContent, _linkStyle);
 		    GUILayout.FlexibleSpace();

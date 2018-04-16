@@ -56,7 +56,7 @@ namespace Mapbox.Map
 		public static TileResource MakeGeoServerVector(CanonicalTileId id, string mapId, string gridset)
 		{			
 			// GeoServer URL format: http://host:port/geoserver/gwc/service/tms/1.0.0/ {layer_name} @ {gridset_name} @pbf/ {z/x/y}.pbf
-			if (Constants.WebMercatorGridset.Equals(gridset))
+			if (Constants.GeoServerWebMercatorGridset.Equals(gridset))
 			{
 				// flip y-axis in case of WebMercator projection
 				var y = (int) Math.Pow(2, id.Z) - id.Y - 1;

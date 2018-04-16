@@ -20,15 +20,17 @@ namespace Mapbox.Utils
 		/// <summary> Mercator projection max longitude limit. </summary>
 		public const double LongitudeMax = 180;
 
-		/// <summary> Mercator projection max meters</summary>
+		/// <summary> Mercator projection max meters. </summary>
 		public const double WebMercMax = 20037508.342789244;
 
-		/// <summary> Epsilon to comapre floating point numbers</summary>
+		/// <summary> Epsilon to comapre floating point numbers. </summary>
 		public const float EpsilonFloatingPoint = 1E-05f;
 
-		// TODO geoAR: add text field for configuration in Unity  
-		public const string GeoServerAPI = "http://localhost:8580/geoserver/gwc/service/tms/";
-		public const string WebMercatorGridset = "EPSG:900913";
+		/// <summary> GeoServer GeoWebCache API. </summary>
+		public const string GeoServerAPI = "geoserver/gwc/service/tms/1.0.0/";
+		
+		/// <summary> GeoServer's preconfuigred  Web Mercator gridset. </summary>
+		public const string GeoServerWebMercatorGridset = "EPSG:900913";
 
 	}
 }

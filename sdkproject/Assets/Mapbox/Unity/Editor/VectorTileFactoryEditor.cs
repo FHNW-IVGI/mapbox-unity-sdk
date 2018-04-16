@@ -13,7 +13,7 @@ namespace Mapbox.Editor
 		public SerializedProperty mapId_Prop;
 		private SerializedProperty _useGeoServer;
 		private SerializedProperty _gridset;
-		private string _defaultGridset = Utils.Constants.WebMercatorGridset;
+		private string _defaultGridset = Utils.Constants.GeoServerWebMercatorGridset;
 		private VectorTileFactory _factory;
 		private MonoScript script;
 
