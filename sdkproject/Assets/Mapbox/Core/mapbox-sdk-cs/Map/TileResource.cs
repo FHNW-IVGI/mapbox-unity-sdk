@@ -50,11 +50,7 @@ namespace Mapbox.Map
 		{			
 			// GeoServer: {http://localhost:8580/geoserver/gwc/service/tms/1.0.0/test:linesV} @EPSG%3A2056@pbf/ {2/0/0}.pbf
 			// Mapbox: {https://api.mapbox.com/v4/mschoenhozer.9bdivm08} / {9/266/180} .vector.pbf
-			// TODO geoAR: only for debugging, adjust coordinates to canonical tile id conversion
-			if (alternative)
-			{
-				id = new CanonicalTileId(0, 0, 0);
-			}
+			// TODO geoAR: do not hardcode gridset id
 			
 			return alternative ? 
 				new TileResource(string.Format("{0}@EPSG%3A2056@pbf/{1}.pbf", MapUtils.MapIdToUrl(mapId, true), id)) :

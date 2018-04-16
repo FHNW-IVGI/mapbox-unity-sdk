@@ -20,6 +20,9 @@ namespace Mapbox.Map
 
 		/// <summary> The Y coordinate in the tile grid. </summary>
 		public readonly int Y;
+	
+		/// <summary> The Y coordinate in the tile grid. </summary>
+		public readonly bool FlipY;
 
 		/// <summary>
 		///     Initializes a new instance of the <see cref="UnwrappedTileId"/> struct,
@@ -29,11 +32,13 @@ namespace Mapbox.Map
 		/// <param name="z">The z coordinate.</param>
 		/// <param name="x">The x coordinate.</param>
 		/// <param name="y">The y coordinate.</param>
-		public UnwrappedTileId(int z, int x, int y)
+		/// <param name="flipY">Flip y axis.</param>
+		public UnwrappedTileId(int z, int x, int y, bool flipY=false)
 		{
 			this.Z = z;
 			this.X = x;
 			this.Y = y;
+			this.FlipY = flipY;
 		}
 
 		/// <summary> Gets the canonical tile identifier. </summary>
@@ -63,7 +68,8 @@ namespace Mapbox.Map
 		{
 			get
 			{
-				return new UnwrappedTileId(Z, X, Y - 1);
+				var one = FlipY ? 1 : -1;
+				return new UnwrappedTileId(Z, X, Y + one, FlipY);
 			}
 		}
 
@@ -71,7 +77,7 @@ namespace Mapbox.Map
 		{
 			get
 			{
-				return new UnwrappedTileId(Z, X + 1, Y);
+				return new UnwrappedTileId(Z, X + 1, Y, FlipY);
 			}
 		}
 
@@ -79,7 +85,8 @@ namespace Mapbox.Map
 		{
 			get
 			{
-				return new UnwrappedTileId(Z, X, Y + 1);
+				var one = FlipY ? -1 : 1;
+				return new UnwrappedTileId(Z, X, Y + one, FlipY);
 			}
 		}
 
@@ -87,7 +94,7 @@ namespace Mapbox.Map
 		{
 			get
 			{
-				return new UnwrappedTileId(Z, X - 1, Y);
+				return new UnwrappedTileId(Z, X - 1, Y, FlipY);
 			}
 		}
 
@@ -95,7 +102,8 @@ namespace Mapbox.Map
 		{
 			get
 			{
-				return new UnwrappedTileId(Z, X + 1, Y - 1);
+				var one = FlipY ? 1 : -1;
+				return new UnwrappedTileId(Z, X + 1, Y + one, FlipY);
 			}
 		}
 
@@ -103,7 +111,8 @@ namespace Mapbox.Map
 		{
 			get
 			{
-				return new UnwrappedTileId(Z, X + 1, Y + 1);
+				var one = FlipY ? -1 : 1;
+				return new UnwrappedTileId(Z, X + 1, Y + one, FlipY);
 			}
 		}
 
@@ -111,7 +120,8 @@ namespace Mapbox.Map
 		{
 			get
 			{
-				return new UnwrappedTileId(Z, X - 1, Y - 1);
+				var one = FlipY ? 1 : -1;
+				return new UnwrappedTileId(Z, X - 1, Y + one, FlipY);
 			}
 		}
 
@@ -119,7 +129,8 @@ namespace Mapbox.Map
 		{
 			get
 			{
-				return new UnwrappedTileId(Z, X - 1, Y + 1);
+				var one = FlipY ? -1 : 1;
+				return new UnwrappedTileId(Z, X - 1, Y + one, FlipY);
 			}
 		}
 	}
