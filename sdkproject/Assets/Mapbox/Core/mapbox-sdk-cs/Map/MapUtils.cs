@@ -50,7 +50,7 @@ namespace Mapbox.Map
 		/// <param name="alternative">If to use alternative URL.</param>
 		public static string MapIdToUrl(string id, bool alternative=false)
 		{
-			return alternative ? MapIdToAlternativeUrl(id) : MapIdToMapboxUrl(id);
+			return alternative ? MapIdToGeoServerUrl(id) : MapIdToMapboxUrl(id);
 		}
 		
 		private static string MapIdToMapboxUrl(string id)
@@ -60,9 +60,9 @@ namespace Mapbox.Map
 			return MapBaseApi + id;
 		}
 		
-		private static string MapIdToAlternativeUrl(string id)
+		private static string MapIdToGeoServerUrl(string id)
 		{
-			const string MapBaseApi = Constants.AlternativeAPI + "1.0.0/";
+			const string MapBaseApi = Constants.GeoServerAPI + "1.0.0/";
 			return MapBaseApi + id;
 		}
 	}

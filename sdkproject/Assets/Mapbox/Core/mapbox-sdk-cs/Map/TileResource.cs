@@ -4,6 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
+using Mapbox.Utils;
 using UnityEngine;
 
 namespace Mapbox.Map
@@ -46,15 +47,24 @@ namespace Mapbox.Map
 			return new TileResource(string.Format("{0}/{1}.pngraw", MapUtils.MapIdToUrl(mapId ?? "mapbox.terrain-rgb"), id));
 		}
 
-		public static TileResource MakeVector(CanonicalTileId id, string mapId, bool alternative=false)
+		public static TileResource MakeVector(CanonicalTileId id, string mapId)
 		{			
-			// GeoServer: {http://localhost:8580/geoserver/gwc/service/tms/1.0.0/test:linesV} @EPSG%3A2056@pbf/ {2/0/0}.pbf
-			// Mapbox: {https://api.mapbox.com/v4/mschoenhozer.9bdivm08} / {9/266/180} .vector.pbf
-			// TODO geoAR: do not hardcode gridset id
+			// Mapbox URL format: {https://api.mapbox.com/v4/map_id} / {9/266/180} .vector.pbf
+			return new TileResource(string.Format("{0}/{1}.vector.pbf", MapUtils.MapIdToUrl(mapId ?? "mapbox.mapbox-streets-v7"), id));
+		}
+		
+		public static TileResource MakeGeoServerVector(CanonicalTileId id, string mapId, string gridset)
+		{			
+			// GeoServer URL format: {http://host:port/geoserver/gwc/service/tms/1.0.0/layer_name} @ {gridset_name} @pbf/ {2/0/0}.pbf
+			if (Constants.WebMercatorGridset.Equals(gridset))
+			{
+				// flip y-axis in case of WebMercator projection
+				var y = (int) Math.Pow(2, id.Z) - id.Y - 1;
+				id = new CanonicalTileId(id.Z, id.X, y);	
+			}
 			
-			return alternative ? 
-				new TileResource(string.Format("{0}@EPSG%3A2056@pbf/{1}.pbf", MapUtils.MapIdToUrl(mapId, true), id)) :
-				new TileResource(string.Format("{0}/{1}.vector.pbf", MapUtils.MapIdToUrl(mapId ?? "mapbox.mapbox-streets-v7"), id));
+			var url = string.Format("{0}@{1}@pbf/{2}.pbf", MapUtils.MapIdToUrl(mapId, true), WWW.EscapeURL(gridset), id);
+			return new TileResource(url);
 		}
 
 		internal static TileResource MakeStyleOptimizedVector(CanonicalTileId id, string mapId, string optimizedStyleId, string modifiedDate)
