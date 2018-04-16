@@ -118,8 +118,19 @@ namespace Mapbox.Unity.MeshGeneration.Data
 		internal void Initialize(IMapReadable map, UnwrappedTileId tileId, float scale, int zoom, Texture2D loadingTexture = null)
 		{
 			TileScale = scale;
-			_relativeScale = 1 / Mathf.Cos(Mathf.Deg2Rad * (float)map.CenterLatitudeLongitude.x);
-			_rect = Conversions.TileBounds(tileId);
+			
+			// TODO geoAR: use bool flag instead of direct type check
+			if (map is SwissBasicMap)
+			{
+				_relativeScale = scale;
+				_rect = SwissConversions.TileBounds(tileId);
+			}
+			else
+			{
+				_relativeScale = 1 / Mathf.Cos(Mathf.Deg2Rad * (float)map.CenterLatitudeLongitude.x);
+				_rect = Conversions.TileBounds(tileId);
+			}
+			
 			_unwrappedTileId = tileId;
 			_canonicalTileId = tileId.Canonical;
 			_loadingTexture = loadingTexture;

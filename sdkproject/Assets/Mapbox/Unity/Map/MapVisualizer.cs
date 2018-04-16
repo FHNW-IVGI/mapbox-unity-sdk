@@ -23,8 +23,8 @@ namespace Mapbox.Unity.Map
 
 	/// <summary>
 	/// Map Visualizer
-	/// Represents a map. Doesn't contain much logic and at the moment, it creates requested tiles and relays them to the factories 
-	/// under itself. It has a caching mechanism to reuse tiles and does the tile positioning in unity world.
+	/// Represents a map.Doesn't contain much logic and at the moment, it creates requested tiles and relays them to the factories 
+	/// under itself.It has a caching mechanism to reuse tiles and does the tile positioning in unity world.
 	/// Later we'll most likely keep track of map features here as well to allow devs to query for features easier 
 	/// (i.e.query all buildings x meters around any restaurant etc).
 	/// </summary>
@@ -38,11 +38,10 @@ namespace Mapbox.Unity.Map
 			// TODO: this is constant for all tiles--cache.
 			var scale = tile.TileScale;
 
-			var flip = tileId.FlipY ? -1 : 1;
 			var position = new Vector3(
 				(float)(rect.Center.x - map.CenterMercator.x) * scale, 
 				0, 
-				(float)(rect.Center.y - map.CenterMercator.y) * scale * flip);
+				(float)(rect.Center.y - map.CenterMercator.y) * scale);
 			tile.transform.localPosition = position;
 		}
 	}

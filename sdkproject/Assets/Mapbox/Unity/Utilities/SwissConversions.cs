@@ -80,9 +80,7 @@ namespace Mapbox.Unity.Utilities
 	    {
 		    var px = MetersToPixels(ch, zoom);
 		    var tile = PixelsToTile(px); 
-		    // FlipY is set to 'true' because y-axis of tile coordinate grid is north-oriented
-		    // (unlike Web Mercator with south-orienter y-axis)  
-		    return new UnwrappedTileId(zoom, tile[0], tile[1], true);
+		    return new UnwrappedTileId(zoom, tile[0], tile[1]);
 	    }
 	    
 	    /// <summary>

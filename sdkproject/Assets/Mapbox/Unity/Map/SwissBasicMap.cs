@@ -27,6 +27,7 @@ namespace Mapbox.Unity.Map
             _mapVisualizer.Initialize(this, _fileSource);
             _tileProvider.Initialize(this);
             
+            // TODO geoAR: remove logging
             Debug.Log("Center lat/lon: " + _centerLatitudeLongitude);
             Debug.Log("Center Mercator: " + _centerMercator);
             Debug.Log("Reference tile: min=" + referenceTileRect.Min + ", max=" + referenceTileRect.Max + ", size="+ referenceTileRect.Size);
