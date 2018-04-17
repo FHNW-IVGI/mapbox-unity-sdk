@@ -154,7 +154,7 @@ namespace Mapbox.Editor
 		    EditorGUILayout.LabelField("GeoServer URL", _titleStyle);
 		    
 		    EditorGUILayout.BeginHorizontal(_horizontalGroup);
-		    GUIContent labelContent = new GUIContent("Web admin interface URL, for example:");
+		    GUIContent labelContent = new GUIContent("GeoServer URL, for example:");
 		    GUIContent linkContent = new GUIContent("http://my-domain.com/geoserver/");
 		    EditorGUILayout.LabelField(labelContent, _bodyStyle, GUILayout.Width(_bodyStyle.CalcSize(labelContent).x));
 		    EditorGUILayout.LabelField(linkContent, _linkStyle);
