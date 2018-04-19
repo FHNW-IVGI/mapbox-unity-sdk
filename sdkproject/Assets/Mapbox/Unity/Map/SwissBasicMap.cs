@@ -14,7 +14,7 @@ namespace Mapbox.Unity.Map
         public override void Initialize(Vector2d latLon, int zoom)
         {
             _worldHeightFixed = false;
-            // Swiss grid meters, not lat/lag
+            // Swiss grid meters (east/north), not lat/lon
             _centerLatitudeLongitude = SwissConversions.LatLonToMeters(latLon);
             _zoom = zoom;
             _initialZoom = zoom;
