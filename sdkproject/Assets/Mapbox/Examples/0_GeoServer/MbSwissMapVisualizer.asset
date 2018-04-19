@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526c8a90df31d41fe8057a6f85c7a3e4, type: 3}
+  m_Name: MbSwissMapVisualizer
+  m_EditorClassIdentifier: 
+  Factories:
+  - {fileID: 11400000, guid: 0fee8f742c055457bb96ab8789d79106, type: 2}
+  - {fileID: 11400000, guid: ff3ba6a0fefcc43c9a539a96a9a8bbff, type: 2}
+  - {fileID: 11400000, guid: e6efc09a56a654b22b2c1a134ea50fac, type: 2}
+  - {fileID: 11400000, guid: bd853779c2b814640bf2ca8b6dd950fb, type: 2}
+  _loadingTexture: {fileID: 0}
