@@ -14,10 +14,10 @@ namespace Mapbox.Unity.Utilities
 	    /// </summary>
 	    static class BoundingBox
 	    {
-		    public const double xMin = 2485014.052451379 - 2600000;
-		    public const double xMax = 2837016.9329778464 - 2600000;
-		    public const double yMin = 1074188.6943776922 - 1200000;
-		    public const double yMax = 1299782.763494124 - 1200000;
+		    public const double xMin = 2485869.5728 - 2600000;
+		    public const double xMax = 2837076.5648 - 2600000;
+		    public const double yMin = 1076443.1884 - 1200000;
+		    public const double yMax = 1299941.7864 - 1200000;
 	    }
 
 	    static class OriginLv03
@@ -28,7 +28,7 @@ namespace Mapbox.Unity.Utilities
 
 	    private const int TileSize = 256; 
 	    // Pixel size for zoom level 0 according to GeoServer EPSG:2056 Gridset definition
-	    private const double InitialResolution = 881.2268324860615;
+	    private const double InitialResolution = 873.0413984375;
         
         /// <summary>
         /// Converts <see cref="T:Mapbox.Utils.Vector2d"/> struct of WGS84 lat/lon to shifted

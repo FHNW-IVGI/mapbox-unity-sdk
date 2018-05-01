@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Mapbox.Map {
 	
 	/// <summary>
@@ -16,8 +14,6 @@ namespace Mapbox.Map {
 
 		internal override TileResource MakeTileResource(string mapId) {		
 			TileResource tr = TileResource.MakeGeoServerVector(Id, mapId, _gridset);
-			// TODO geoAR: remove logging
-			Debug.Log(tr.GetUrl());
 			return tr;
 		}
 

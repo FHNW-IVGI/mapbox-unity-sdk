@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d97cb1cfb3f1b499c24763afa54873, type: 3}
   m_Name: RiverVectorTileFactory
   m_EditorClassIdentifier: 
-  _mapId: water:21_DKM1M_GEWAESSER_LIN
+  _mapId: geoARedu.water:21_DKM1M_GEWAESSER_LIN
   _useGeoServer: 1
   _gridset: EPSG:2056
   Visualizers:

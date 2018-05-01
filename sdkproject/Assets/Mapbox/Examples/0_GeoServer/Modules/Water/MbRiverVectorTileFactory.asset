@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d97cb1cfb3f1b499c24763afa54873, type: 3}
   m_Name: MbRiverVectorTileFactory
   m_EditorClassIdentifier: 
-  _mapId: mschoenhozer.2oyugjx7
+  _mapId: ivgi.asp14lnl
   _useGeoServer: 0
   _gridset: EPSG:900913
   Visualizers:

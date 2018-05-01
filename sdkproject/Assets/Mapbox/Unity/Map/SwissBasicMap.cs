@@ -24,14 +24,14 @@ namespace Mapbox.Unity.Map
             _centerMercator = referenceTileRect.Center;
 
             _worldRelativeScale = (float) (_unityTileSize / referenceTileRect.Size.x);
+
+            // TODO geoAR: remove logging
+            var rootVector2d = (_centerMercator - _centerLatitudeLongitude) * _worldRelativeScale;
+            var rootPosition = rootVector2d.ToVector3xz();
+            Debug.Log("Root shifted position: " + rootPosition + "; zoom level: " + _zoom);
+
             _mapVisualizer.Initialize(this, _fileSource);
             _tileProvider.Initialize(this);
-            
-            // TODO geoAR: remove logging
-            Debug.Log("Center lat/lon: " + _centerLatitudeLongitude);
-            Debug.Log("Center Mercator: " + _centerMercator);
-            Debug.Log("Reference tile: min=" + referenceTileRect.Min + ", max=" + referenceTileRect.Max + ", size="+ referenceTileRect.Size);
-            Debug.Log("Relative scale: " + _worldRelativeScale);
 
             SendInitialized();
         }
