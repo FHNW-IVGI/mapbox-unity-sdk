@@ -1,3 +1,5 @@
+**Switch to branch 'geoserver' for GeoServer support.**
+
 # Mapbox-unity-sdk
 ### For Unity 2017.1+  
 
