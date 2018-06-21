@@ -71,6 +71,10 @@ To retrive data from GeoGerver:
 
 Currently only 2 gridsets are suppotred:
 
-- **EPSG:900913** (default): corrensponds to Web Mercator grid which is the only tile grid supported by Mapbox. Vector tiles from this gridset can be combined with vector or raster tiles retrieved from Mapbox since they have the same boundaries. Can be used in any Mapbox's `AbstractMap` implementatins (`BasicMap`, `MapAtSpecificLocation` etc.)
-- **EPSG:2056**: CH1903+ / LV95 Gridset. Can be use only in `SwissBasicMap` with `SwissRangeTileProvider` or `SwissCameraBoundsTileProvider`. See `mapbox-unity-sdk/sdkproject/Assets/Mapbox/Examples/0_GeoServer/SwissMap.unity` scene for configuration example.
+- **EPSG:900913** (default): corrensponds to Web Mercator grid which is the only tile grid supported by Mapbox. Vector tiles from this gridset can be combined with vector or raster tiles retrieved from Mapbox since they have the same boundaries. Tiles from this gridset can be used in any Mapbox's `AbstractMap` implementations (`BasicMap`, `MapAtSpecificLocation` etc.)
+- **EPSG:2056**: CH1903+ / LV95 Gridset. Can be used only in `SwissBasicMap` with `SwissRangeTileProvider` or `SwissCameraBoundsTileProvider`. See `mapbox-unity-sdk/sdkproject/Assets/Mapbox/Examples/0_GeoServer/SwissMap.unity` scene for configuration example.
 
+### Known Issues
+Android build cannot read GeoServer URL configured using 'Setup GeoServer' dialog. 
+
+Workaround: hardcode 'geoServerBaseUrl' value in `MapUtils.cs#MapIdToGeoServerUrl(string id)`
