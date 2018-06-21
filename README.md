@@ -5,9 +5,11 @@ GeoServer support is available only in branch [geoserver](https://github.com/FHN
 
 Currently only **vector data** (VectorTiles) is supported.
 
-Modifications are based on [mapbox-unity-sdk_v1.3.0](https://github.com/mapbox/mapbox-unity-sdk/releases/tag/v1.3.0) and tested with **Unity 2017.1.0** and **GeoServer 2.12.1**.
+Modifications are based on [mapbox-unity-sdk_v1.3.0](https://github.com/mapbox/mapbox-unity-sdk/releases/tag/v1.3.0) and tested with **Unity 2017.1.0** and **GeoServer 2.13.0**.
 
 # Getting started
+
+If you didn't work with `mapbox-unity-sdk` before, it is highly recommended to have a look at [Mapbox Unity](https://www.mapbox.com/unity/) documentation and [examples](https://www.mapbox.com/unity-sdk/overview/) first.
 
 ## Building a Unity Package from this Repository
 
@@ -24,10 +26,16 @@ Linux/Mac: `./update-mapbox-unity-sdk-core.sh`
 
 
 ### Dependencies
-This project includes git submodule dependencies outlined in [this gitmodules](https://github.com/mapbox/mapbox-unity-sdk/blob/develop/.gitmodules) file.
+This project includes git submodule dependencies outlined in [this gitmodules](https://github.com/FHNW-IVGI/mapbox-unity-sdk/blob/geoserver/.gitmodules) file.
 
 To install/update the dependencies after `git clone`/`git pull` run `update-mapbox-unity-sdk-core.bat` or `update-mapbox-unity-sdk-core.sh` (depending on your OS).
 
+In particular, this project depends on the [vector-tile-cs](https://github.com/mapbox/vector-tile-cs) module.
+
+**IMPORTANT**
+
+'vector-tile-cs' module decodes tiles created according to Mapbox Vector Tile (MVT) Specification v2.x, v1.x is not supported. GeoServer 2.13.0 generates tiles according to MTV Specification v1.0. It is possible to use 'vector-tile-cs' with GeoServer 2.13.0 by commenting out the corresponding version check in `mapbox-unity-sdk/sdkproject/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/VectorTileReader/VectorTileReader.cs#getLayer(byte[] data)`.
+The correct decoding of tiles is not garanteed though.
 
 ### Building a Unity Package
 To build a Unity Package for import into your own project from the included `sdkproject`:
@@ -46,8 +54,23 @@ To build a Unity Package for import into your own project from the included `sdk
 
 ### GeoServer Support
 To retrive data from GeoGerver:
-1. Configure GeoServer URL in `Mapbox->Setup GeoServer`.
-!['Setup GeoServer' screenshot](documentation/docs/images/configure-geoserver-url.png)
-2. TODO
 
-# GeoServer Configuration
+1. Disable MVT version check in `mapbox-unity-sdk/sdkproject/Assets/Mapbox/Core/Plugins/Mapbox/vector-tile-cs/VectorTileReader/VectorTileReader.cs#getLayer(byte[] data)`.
+
+![MVT version check](documentation/docs/images/mtv-version-check.png)
+
+2. Configure GeoServer URL in `Mapbox->Setup GeoServer`.
+
+![Setup GeoServer](documentation/docs/images/configure-geoserver-url.png)
+
+3. Check 'Use GeoServer' checkbox in VectorTileFactory inspector window.
+
+![VectorTileFactory inspector window](documentation/docs/images/tileFactory-geoServer.png)
+
+4. OPTIONAL: adjust 'Gridset' value
+
+Currently only 2 gridsets are suppotred:
+
+- **EPSG:900913** (default): corrensponds to Web Mercator grid which is the only tile grid supported by Mapbox. Vector tiles from this gridset can be combined with vector or raster tiles retrieved from Mapbox since they have the same boundaries. Can be used in any Mapbox's `AbstractMap` implementatins (`BasicMap`, `MapAtSpecificLocation` etc.)
+- **EPSG:2056**: CH1903+ / LV95 Gridset. Can be use only in `SwissBasicMap` with `SwissRangeTileProvider` or `SwissCameraBoundsTileProvider`. See `mapbox-unity-sdk/sdkproject/Assets/Mapbox/Examples/0_GeoServer/SwissMap.unity` scene for configuration example.
+
