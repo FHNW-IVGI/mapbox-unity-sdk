@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63d97cb1cfb3f1b499c24763afa54873, type: 3}
   m_Name: BorderVectorTileFactory
   m_EditorClassIdentifier: 
-  _mapId: geoARedu.admin:swissBOUNDARIES3D_1_3_TLM_KANTONSGRENZE
+  _mapId: geoARedu:swissBOUNDARIES3D_1_3_TLM_KANTONSGRENZE
   _useGeoServer: 1
   _gridset: EPSG:2056
   Visualizers:

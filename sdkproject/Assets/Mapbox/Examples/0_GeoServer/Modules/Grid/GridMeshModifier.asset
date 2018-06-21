@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Name: GridMeshModifier
   m_EditorClassIdentifier: 
   Active: 1
-  Width: 200
+  Width: 300
